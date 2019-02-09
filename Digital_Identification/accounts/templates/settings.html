@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="container" style="width:600px">
+
+<h3>Edit your information</h3>
+<form class="form-control" action="{% url 'settings'%}" method="post">
+  {% csrf_token %}
+  First name : <input id='fn' type="text" name="first_name" value="{{request.user.logger.first_name}}" disabled> <a style="position:absolute" id='fne' href="#" onclick="document.getElementById('fn').removeAttribute('disabled');this.style.display='none';document.getElementById('fnc').style.display='block'"><span class="badge">edit</span></a> <a id='fnc' href="#" onclick="document.getElementById('fn').setAttribute('disabled','');this.style.display='none';document.getElementById('fne').style.display='block'" style="position:absolute;  display:none"><span class="badge">cancel</span></a><br><br>
+
+  Last name : <input id='ln' type="text" name="last_name" value="{{request.user.logger.last_name}}" disabled> <a style="position:absolute" id='lne' href="#" onclick="document.getElementById('ln').removeAttribute('disabled');this.style.display='none';document.getElementById('lnc').style.display='block'"><span class="badge">edit</span></a> <a id='lnc' href="#" onclick="document.getElementById('ln').setAttribute('disabled','');this.style.display='none';document.getElementById('lne').style.display='block'" style="position:absolute;  display:none"><span class="badge">cancel</span></a><br><br>
+
+  Username : <input id='un' type="text" name="username" value="{{request.user.username}}" disabled> <a style="position:absolute" id='une' href="#" onclick="document.getElementById('un').removeAttribute('disabled');this.style.display='none';document.getElementById('unc').style.display='block'"><span class="badge">edit</span></a> <a id='unc' href="#" onclick="document.getElementById('un').setAttribute('disabled','');this.style.display='none';document.getElementById('une').style.display='block'" style="position:absolute;  display:none"><span class="badge">cancel</span></a><br><br>
+
+  Password : <input id='pw' type="password" name="password" value="" autocomplete="off" disabled> <a style="position:absolute" id='pwe' href="#" onclick="document.getElementById('pw').removeAttribute('disabled');this.style.display='none';document.getElementById('pwc').style.display='block'"><span class="badge">edit</span></a> <a id='pwc' href="#" onclick="document.getElementById('pw').setAttribute('disabled','');this.style.display='none';document.getElementById('pwe').style.display='block'" style="position:absolute;  display:none"><span class="badge">cancel</span></a><br><br>
+
+  Age : <input id='ag' type="number" name="age" min="13" max="125" value="{{request.user.logger.age}}" disabled disabled><a style="position:absolute" id='age' href="#" onclick="document.getElementById('ag').removeAttribute('disabled');this.style.display='none';document.getElementById('agc').style.display='block'"><span class="badge">edit</span></a> <a id='agc' href="#" onclick="document.getElementById('ag').setAttribute('disabled','');this.style.display='none';document.getElementById('age').style.display='block'" style="position:absolute;  display:none"><span class="badge">cancel</span></a><br><br>
+
+  Gender<br>
+  Male : <input id='gn' type="radio" name="gender" value="Male" {%if request.user.logger.gender == 'male'%} checked {%endif%} disabled> &nbsp;
+  Female : <input id='gn' type="radio" name="gender" value="Female" {%if request.user.logger.gender == 'female'%} checked {%endif%} disabled>  <a style="position:absolute" id='gne' href="#" onclick="document.getElementById('gn').removeAttribute('disabled');this.style.display='none';document.getElementById('gnc').style.display='block'"><span class="badge">edit</span></a> <a id='gnc' href="#" onclick="document.getElementById('gn').setAttribute('disabled','');this.style.display='none';document.getElementById('gne').style.display='block'" style="position:absolute;  display:none"><span class="badge">cancel</span></a><br><br>
+
+  Bio : <input id='bi' type="text" name="bio" value="{{request.user.logger.bio}}" disabled> <a style="position:absolute" id='bie' href="#" onclick="document.getElementById('bi').removeAttribute('disabled');this.style.display='none';document.getElementById('bic').style.display='block'"><span class="badge">edit</span></a> <a id='bic' href="#" onclick="document.getElementById('bi').setAttribute('disabled','');this.style.display='none';document.getElementById('bie').style.display='block'" style="position:absolute;  display:none"><span class="badge">cancel</span></a><br><br>
+
+  <input type="submit" name="signup" value="Submit"><br><br>
+
+</form>
+</div>
+{%endblock%}

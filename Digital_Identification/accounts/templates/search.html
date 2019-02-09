@@ -1,0 +1,13 @@
+{%extends 'base.html'%}
+{%block content%}
+  {% load static%}
+  {% get_static_prefix as STATIC_PREFIX %}
+  {%if users%}
+  {%for i in users%}
+  <!-- {{forloop.counter}}. -->
+  <a href="{% url 'profile'%}?uid={{i.id}}">{{i}}</a>
+  <img src="{{STATIC_PREFIX}}{{i.logger.pp}}" alt="{{i.logger.first_name}}  {{i.logger.last_name}}" width=100 class="img-thumbnail">
+  <hr>
+  {%endfor%}
+  {%endif%}
+{%endblock%}
