@@ -57,7 +57,6 @@ def search(request):
             context['users']=User.objects.filter(Q(username__icontains=t)|Q(first_name__icontains=t)|Q(last_name__icontains=t))
         except:
             pass
-
     return render(request,'search.html',context=context)
 def settings(request):
     context={}
