@@ -5,4 +5,5 @@ from django.contrib.auth.models import User
 
 admin.site.register(Beneficiary)
 admin.site.register(Image)
+admin.site.register(Orginization)
 # admin.site.register(User)

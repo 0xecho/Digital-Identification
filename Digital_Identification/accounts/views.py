@@ -63,3 +63,6 @@ def settings(request):
     if request.method=='POST':
         print(request.POST)
     return render(request,'settings.html',context=context)
+
+def search(request):
+    return render(request,'Orginizations/Search_Personel.html')
