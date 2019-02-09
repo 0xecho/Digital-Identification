@@ -2,12 +2,12 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout as _logout
 from django.contrib.auth.models import User
-from .models import Beneficiary
+from .models import Beneficiary,Displacement
 from django.db.models import Q
 # Create your views here.
 
 def createUser(request):
-    context={}
+    context={"displacement_reason":Displacement.objects.all()}
     if request.method=='POST':
         print(request.POST)
         if not request.POST['password'] == request.POST['password2'] :
@@ -30,6 +30,7 @@ def createUser(request):
         u=authenticate(request,username=request.POST['username'],password=request.POST['password'])
         login(request,u)
         return redirect('account')
+
     return render(request,'signup.html',context=context)
 def account(request):
     context={}

@@ -10,13 +10,16 @@
     {% csrf_token %}
     First name : <input type="text" name="first_name" value="" required><br><br>
     Last name : <input type="text" name="last_name" value="" required><br><br>
-    Username : <input type="text" name="username" value="" required><br><br>
-    Password : <input type="password" name="password" value="" required><br><br>
-    Confirm Password: <input type="password" name="password2" value="" required><br><br>
-    Age : <input type="number" name="age" min="13" max="125" value=""required> <br><br>
     Gender<br>
     Male : <input type="radio" name="gender" value="Male"> &nbsp;
     Female : <input type="radio" name="gender" value="Female"><br><br>
+    Date of Birth : <input type="date" name="age" min="13" max="125" value=""required> <br><br>
+    Displacement reason :
+    <select class="" name="">
+      {%for i in displacement_reason%}
+        <option value="{{i}}">{{i}}</option>
+      {%endfor%}
+    </select>
     <input type="submit" name="signup" value="Signup"><br><br>
   </form>
 </div>
