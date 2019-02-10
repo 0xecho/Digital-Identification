@@ -15,8 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+<<<<<<< HEAD
+# from accounts.resources import FullAccess
+# fullaccess=FullAccess()
+=======
+>>>>>>> 8df0d68f8e7a417dac06ce485b1ed73ac1f967b4
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('accounts.urls')),
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8df0d68f8e7a417dac06ce485b1ed73ac1f967b4
 ]
