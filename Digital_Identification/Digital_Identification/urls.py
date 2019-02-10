@@ -15,11 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from accounts.resources import FullAccess
-fullaccess=FullAccess()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('accounts.urls')),
-    path('api/',include(fullaccess.urls)),
 ]

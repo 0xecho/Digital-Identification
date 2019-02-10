@@ -56,6 +56,10 @@ class Image(models.Model):
     img=models.CharField(max_length=255,null=True)
     uploader=models.ForeignKey(Beneficiary,on_delete=models.CASCADE,null=True,related_name='img')
 
+class Orginization(models.Model):
+    key=models.CharField(max_length=100)
+
+
 # DO DIZ
 # g=Gender()
 # g.gender="male"
