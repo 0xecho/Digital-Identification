@@ -89,4 +89,69 @@ def settings(request):
     return render(request,'settings.html',context=context)
 
 def search(request):
-    return render(request,'Orginizations/Search_Personel.html')
+    posted=False
+    if(request.method=='POST'):
+        posted=True
+        req=request.POST
+        org=req["Orginization"]
+        cit=req["citizen_info"]
+        a=Orginization.objects.get(orginization=org)
+        fn=a.first_name
+        ln=a.last_name
+        dob=a.date_of_birth
+        gen=a.gender
+        disr=a.displacement_reason
+        dissa=a.disabilities
+        coo=a.country_of_origin
+        photo=a.photo
+        arr=(fn,ln,dob,gen,disr,dissa,coo,photo)
+
+        # TODO: check org;;;
+        first_name=""
+        last_name=""
+        date_of_birth=""
+        gender=""
+        displacement_reason=""
+        number_of_familymembers=""
+        disabilities=""
+        country_of_origin=""
+        photo=""
+
+
+        xx=Beneficiary.objects.get(pk=1)
+        if(fn):
+            first_name=xx.first_name;
+        else:
+            first_name="Not Available"
+        if(ln):
+            last_name=xx.last_name
+        else:
+            last_name="Not Available"
+        if(dob):
+            date_of_birth=xx.date_of_birth
+        else:
+            date_of_birth="Not Available"
+        if(gen):
+            gender=xx.gender
+        else:
+            gender="Not Available"
+        if(disr):
+            displacement_reason=xx.displacement_reason;
+        else:
+            displacement_reason="Not Available"
+        if(dissa):
+            disabilities=xx.disabilities
+        else:
+            disabilities="Not Available"
+        if(coo):
+            country_of_origin=xx.country_of_origin
+        else:
+            country_of_origin="Not Available"
+        if(photo):
+            photo=xx.photo
+        else:
+            photo="N"
+        context={"p":posted,"fn":first_name,"ln":last_name,"dob":date_of_birth,"gen":gender,"disr":displacement_reason,"dissa":disabilities,"coo":country_of_origin,"photo":photo}
+
+        return render(request,'Orginizations/Search_Personel.html',context)
+    return render(request,'Orginizations/Search_Personel.html',{"p":posted})
