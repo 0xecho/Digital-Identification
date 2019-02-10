@@ -1,4 +1,21 @@
 <!DOCTYPE html>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -6,15 +23,63 @@
   </head>
   <body>
     <form class="a" action="#" method="post">
+      {%csrf_token%}
       <select class="ss" name="Orginization">
-        <option value="bank">Bank</option>
+        <option value="Bank">Bank</option>
         <option value="police">Police</option>
-        <option value="hospital">Hospital</option>
-        <option value="relif">Relif</option>
-      </select>
+        <option value="Hospitals">Hospital</option>
+        <option value="Relif">Relif</option>
+      </select><br>
       <input type="text" name="citizen_info" placeholder="Search Citizen"><br>
       <input type="submit" name="submit" value="Search">
-
     </form>
+    {%if p%}
+    p=False
+    <table>
+      <tr>
+      <th>
+        first_name
+      </th>
+      <th>
+        last_name
+      </th>
+      <th>
+        dob
+      </th>
+      <th>
+        gender
+      </th>
+      <th>
+        displacement_reason
+      </th>
+
+      <th>
+        disabilities
+      </th>
+      <th>
+        country_of_origin
+      </th>
+      <th>
+        photo
+      </th>
+      </tr>
+      <tr>
+
+        <td>{{fn}}</td>
+        <td>{{ln}}</td>
+        <td>{{dob}}</td>
+        <td>{{gen}}</td>
+        <td>{{disr}}</td>
+        <td>{{dissa}}</td>
+        <td>{{coo}}</td>
+        <td>{{photo}}</td>
+      </tr>
+
+    </table>
+
+
+
+
+    {%endif%}
   </body>
 </html>

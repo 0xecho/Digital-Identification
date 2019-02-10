@@ -20,7 +20,7 @@ class Beneficiary(models.Model):
     Person_Id=models.CharField(max_length=255,null=True,unique=True)
     def __str__(self):
         return self.first_name
-
+ 
 class Image(models.Model):
     img=models.CharField(max_length=255,null=True)
     uploader=models.ForeignKey(Beneficiary,on_delete=models.CASCADE,null=True,related_name='img')
