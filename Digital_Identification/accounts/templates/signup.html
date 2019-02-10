@@ -1,26 +1,56 @@
 {% extends 'base.html'%}
-
 {%block content%}
 {% if error %}
   {{error}}
 {% endif %}
-<div class="container" style="width:600px">
-
-  <form action="{%url 'createUser'%}" method="post">
+<div style="background:darkgray;">
+<div  style=" margin-left:18%;width:60%;">
+  <form  enctype="multipart/form-data" action="{%url 'createUser'%}" method="post">
     {% csrf_token %}
-    First name : <input type="text" name="first_name" value="" required><br><br>
-    Last name : <input type="text" name="last_name" value="" required><br><br>
-    Gender<br>
-    Male : <input type="radio" name="gender" value="Male"> &nbsp;
-    Female : <input type="radio" name="gender" value="Female"><br><br>
-    Date of Birth : <input type="date" name="age" min="13" max="125" value=""required> <br><br>
-    Displacement reason :
-    <select class="" name="">
-      {%for i in displacement_reason%}
-        <option value="{{i}}">{{i}}</option>
-      {%endfor%}
-    </select>
-    <input type="submit" name="signup" value="Signup"><br><br>
+    <div class="card">
+      <div style="background-color:white;">
+        <h3 style="text-align:center; margin-top:10px;">Sign Up</h3>
+      </div>
+      <div class="card-body" style="background-color:lightgray;">
+        First name : <input type="text" name="first_name" value="" required style="background-color:lightgray;border: 1px solid ;border-top:none;border-left:none;border-right:none;"><br><br>
+        Last name : <input type="text" name="last_name" value="" required style="background-color:lightgray;border:1px solid;border-top:none;border-left:none;border-right:none;"><br><br>
+        Gender<br>
+        Male : <input type="radio" name="gender" value="M"> &nbsp;<br>
+        Female : <input type="radio" name="gender" value="F"><br><br>
+        Date of Birth : <input type="date" name="age" required> <br><br>
+        Displacement reason :
+        <select name="displacement_reason">
+          {%for i in displacement_reason%}
+            <option value="{{i.pk}}">{{i}}</option>
+          {%endfor%}
+        </select><br><br>
+        Disabilities:<br>
+        {%for i in disabilities%}
+        <input type="checkbox" name="disabilities" value="{{i.pk}}">{{i}}
+        {%endfor%}
+        <br><br>
+        Country:
+        <select name="country_of_origin">
+          {%for i in country_of_origin%}
+            <option value="{{i.pk}}">{{i.country_of_origin}}</option>
+          {%endfor%}
+        </select><br><br>
+        Family:<!-- TODO: auto increment -->
+        <select name="family">
+          {%for i in family%}
+          <option value="{{i.pk}}">{{i}}</option>
+          {%endfor%}
+        </select> + <br><br>
+        Family Roles:
+        <select name="family_role">
+          <option value="m">Mother</option>
+          <option value="f">Father</option>
+          <option value="c">Child</option>
+        </select><br><br>
+        <input type="file" name="img"> ##Check if FACE DETECTED
+        <input type="submit" name="signup" value="Signup"><br><br>
+      </div>
+    </div>
   </form>
 </div>
 {%endblock%}

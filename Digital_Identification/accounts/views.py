@@ -2,38 +2,55 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout as _logout
 from django.contrib.auth.models import User
-from .models import Beneficiary,Displacement
+from django import forms
+from .models import *
 from django.db.models import Q
+import json
+from cv import detect_face
 # Create your views here.
+class ImageUploadForm(forms.Form):
+    image=forms.ImageField()
 
 def createUser(request):
-    context={"displacement_reason":Displacement.objects.all()}
+    context={
+            "displacement_reason":Displacement.objects.all(),
+            "disabilities":Disability.objects.all(),
+            "country_of_origin":Country.objects.all(),
+            "family":Family.objects.all(),
+            }
     if request.method=='POST':
-        print(request.POST)
-        if not request.POST['password'] == request.POST['password2'] :
-            context['error']="passwords doesn't match please try again"
-            return render(request,'signup.html',context=context)
-        try:
-            User.objects.get(username=request.POST['username'])
-            context['error']="Username Already taken"
-            return render(request,'signup.html',context=context)
-        except User.DoesNotExist:
-            pass
-        l=Beneficiary()
-        l.first_name=request.POST['first_name']
-        l.last_name=request.POST['last_name']
-        l.age=request.POST['age']
-        l.gender=request.POST['gender']
-        u=User.objects.create_user(username=request.POST['username'],password=request.POST['password'])
-        l.user=u
-        l.save()
-        u=authenticate(request,username=request.POST['username'],password=request.POST['password'])
-        login(request,u)
-        return redirect('account')
-
+        if detect_face(request.FILES["img"]):
+            l=Beneficiary()
+            l.first_name=request.POST['first_name']
+            l.last_name=request.POST['last_name']
+            l.gender=Gender.objects.get(gender=request.POST['gender'])
+            l.date_of_birth=request.POST['age']
+            l.displacement_reason=Displacement.objects.get(pk=request.POST['displacement_reason'])
+            try:
+                l.disabilities=Disability.objects.get(pk=request.POST['disabilities'])
+            except:
+                pass
+            l.country_of_origin=Country.objects.get(pk=request.POST['country_of_origin'])
+            l.family=Family.objects.get(pk=request.POST['family'])
+            l.family_role=request.POST['family_role']
+            l.number_of_familymembers=len(l.family.beneficiary_set.all())+1
+            form=ImageUploadForm(request.POST,request.FILES)
+            print(form)
+            if form.is_valid():
+                l.photo=form.cleaned_data['img']
+            l.save()
+            context['error']=request.POST['first_name']+" "+request.POST['last_name']+" registered."
+        else:
+            context['error']="PHOTO HAS NO FACE, PLEASE RETAKE PHOTO"
     return render(request,'signup.html',context=context)
 def account(request):
     context={}
+    print(request.FILES)
+    if request.method=="POST":
+        if detect_face(request.FILES["img"]):
+            print("yes")
+        else:
+            print("no")
     return render(request,'account.html',context=context)
 def profile(request):
     context={}
