@@ -11,11 +11,11 @@ class Gender(models.Model):
 
 class Country(models.Model):
     country_of_origin=models.CharField(max_length=50)
-if len(Country.objects.all())==0:
-    for i,j in json.load(open("out.json")):
-        c=Country()
-        c.country_of_origin=j
-        c.save()
+# if len(Country.objects.all())==0:
+#     for i,j in json.load(open("out.json")):
+#         c=Country()
+#         c.country_of_origin=j
+#         c.save()
 
 class Displacement(models.Model):
     displacement_reason=models.CharField(max_length=50,choices=(('r1','reason1'),('r2','reason2')))
