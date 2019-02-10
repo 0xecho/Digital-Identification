@@ -1,10 +1,13 @@
 {% extends 'base.html'%}
 {%block title%}<title>Welcome {{request.user}}</title>{%endblock%}
 {%block content%}
-  {{request.user}}
+<div class="container">
+
   <form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
-    <input type="file" name="img">
+    Add Family:<br>
+    
     <input type="submit" name="" value="submit">
   </form>
+</div>
 {%endblock%}
