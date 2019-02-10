@@ -43,6 +43,12 @@ def createUser(request):
         else:
             context['error']="PHOTO HAS NO FACE, PLEASE RETAKE PHOTO"
     return render(request,'signup.html',context=context)
+def add_family(request):
+    f=Family()
+    f.family=f.id
+    f.save()
+    # return render(request,'add_family.html',context=context)
+    return redirect('signup')
 def account(request):
     context={}
     print(request.FILES)

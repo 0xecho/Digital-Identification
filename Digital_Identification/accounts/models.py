@@ -22,7 +22,9 @@ class Displacement(models.Model):
 
 class Family(models.Model):
     family=models.CharField(max_length=50)
-    number_of_familymembers=models.PositiveIntegerField() #Calculate
+    # number_of_familymembers=models.PositiveIntegerField() #Calculate
+    def number_of_familymembers():
+        return len(self.objects.all())
     def __str__(self):
         return self.family
 class Disability(models.Model):
@@ -31,6 +33,8 @@ class Disability(models.Model):
                                 ('deaf','Hearing Impairment'),
                                 ('mute','Speech Impairment'),
                                 ('amputee','Amputee')))
+    def __str__(self):
+        return self.disabilities
 
 class Beneficiary(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='beneficiary',null=True)

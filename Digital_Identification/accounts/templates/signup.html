@@ -15,11 +15,11 @@
         First name : <input type="text" name="first_name" value="" required style="background-color:lightgray;border: 1px solid ;border-top:none;border-left:none;border-right:none;"><br><br>
         Last name : <input type="text" name="last_name" value="" required style="background-color:lightgray;border:1px solid;border-top:none;border-left:none;border-right:none;"><br><br>
         Gender<br>
-        Male : <input type="radio" name="gender" value="M"> &nbsp;<br>
-        Female : <input type="radio" name="gender" value="F"><br><br>
+        Male : <input type="radio" name="gender"required value="M"> &nbsp;<br>
+        Female : <input type="radio" name="gender" required value="F"><br><br>
         Date of Birth : <input type="date" name="age" required> <br><br>
         Displacement reason :
-        <select name="displacement_reason">
+        <select name="displacement_reason" required>
           {%for i in displacement_reason%}
             <option value="{{i.pk}}">{{i}}</option>
           {%endfor%}
@@ -30,24 +30,24 @@
         {%endfor%}
         <br><br>
         Country:
-        <select name="country_of_origin">
+        <select name="country_of_origin" required>
           {%for i in country_of_origin%}
             <option value="{{i.pk}}">{{i.country_of_origin}}</option>
           {%endfor%}
         </select><br><br>
         Family:<!-- TODO: auto increment -->
-        <select name="family">
+        <select name="family" required>
           {%for i in family%}
           <option value="{{i.pk}}">{{i}}</option>
           {%endfor%}
-        </select> + <br><br>
+        </select> <a href="add_family"></a>+<br><br>
         Family Roles:
-        <select name="family_role">
+        <select name="family_role" required>
           <option value="m">Mother</option>
           <option value="f">Father</option>
           <option value="c">Child</option>
         </select><br><br>
-        <input type="file" name="img"> ##Check if FACE DETECTED
+        <input type="file" name="img" required>
         <input type="submit" name="signup" value="Signup"><br><br>
       </div>
     </div>
