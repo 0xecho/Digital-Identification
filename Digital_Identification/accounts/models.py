@@ -28,11 +28,7 @@ class Family(models.Model):
     def __str__(self):
         return self.family
 class Disability(models.Model):
-    disabilities=models.CharField(max_length=50,
-                                choices=(('blind','Visual Impairment'),
-                                ('deaf','Hearing Impairment'),
-                                ('mute','Speech Impairment'),
-                                ('amputee','Amputee')))
+    disabilities=models.CharField(max_length=50,null=True)
     def __str__(self):
         return self.disabilities
 
