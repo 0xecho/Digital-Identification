@@ -4,7 +4,7 @@
 {% get_static_prefix as STATIC_PREFIX %}
 {%if not user is None%}
 {%with r=user%}
-<div class="container mx-auto" style="width:500px">
+<div class="container mx-auto" style="width:60%;">
   Username:<p>{{r.username}}</p>
   First Name: <p>{{r.logger.first_name}}</p>
   Last Name: <p>{{r.logger.last_name}}</p>

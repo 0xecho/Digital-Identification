@@ -2,4 +2,9 @@
 {%block title%}<title>Welcome {{request.user}}</title>{%endblock%}
 {%block content%}
   {{request.user}}
+  <form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <input type="file" name="img">
+    <input type="submit" name="" value="submit">
+  </form>
 {%endblock%}
