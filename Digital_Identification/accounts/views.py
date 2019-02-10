@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout as _logout
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django import forms
 from .models import *
 from django.db.models import Q
@@ -52,6 +53,30 @@ def account(request):
         else:
             print("no")
     return render(request,'account.html',context=context)
+
+def api(request):
+    context={}
+    try:
+        id=request.GET['id']
+        key=request.GET['key']
+        secK="123"
+        if(key!=secK):
+            be="Unauthorised Access"
+            s=json.dumps(be)
+            return HttpResponse(s)
+        try:
+            be=Beneficiary.objects.get(pk=id)
+        except:
+            be="No Match Found"
+
+        # be={"haha": 123}
+        s=json.dumps(be)
+        return HttpResponse(s)
+    except:
+        be="invalid Request"
+        s=json.dumps(be)
+        return HttpResponse(s)
+
 def profile(request):
     context={}
     try:
